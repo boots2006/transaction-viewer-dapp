@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <body>
+
+    <h2>Transaction Viewer</h2>
+
+    <button onclick="loadTx()">Load Transactions</button>
+
+    <ul id="list"></ul>
+
+    <script>
+      async function loadTx() {
+        document.getElementById("list").innerHTML = "Loading...";
+
+        try {
+          const res = await fetch("https://api.example.com/transactions");
+          const data = await res.json();
+
+          let html = "";
+          data.forEach(tx => {
+            html += "<li>" + tx.date + " - " + tx.amount + "</li>";
+          });
+
+          document.getElementById("list").innerHTML = html;
+
+        } catch (e) {
+          document.getElementById("list").innerHTML = "Error loading transactions";
+        }
+      }
+    </script>
+
+  </body>
+</html>
